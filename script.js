@@ -3,7 +3,7 @@ window.emailjsServiceId='service_4t27r3p';
 window.emailjsTemplateId='template_p0fpv7p';
 emailjs.init({publicKey:window.emailjsPublicKey});
 // ===== TELEGRAM CONFIG =====
-const TELEGRAM_BOT_TOKEN = "8095993323:AAGbgOB95e5zu4JoYE1zURt92YOI0tz4hm8";
+const TELEGRAM_BOT_TOKEN = "8095993323:AAGbg0B95e5zu4JoYE1zURt92Y0I0tz4hm8";
 const TELEGRAM_CHAT_ID = "5104013170";
 
 

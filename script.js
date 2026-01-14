@@ -96,7 +96,7 @@ signupForm.onsubmit = async e => {
 
   const data = {
     reg,
-    name: name.value,
+    name: document.getElementById("playerName").value,
     age: age.value,
     parent: parentName.value,
     phone: phone.value,
@@ -131,6 +131,7 @@ signupForm.onsubmit = async e => {
 🎂 Age: ${data.age}
 👨‍👩‍👦 Parent: ${data.parent}
 📞 Phone: ${data.phone}
+🏠 Address: ${data.address}
 ⏰ Timing: ${data.timing}
 📅 Date: ${data.date}
 
@@ -147,6 +148,7 @@ Name: ${data.name}
 Age: ${data.age}
 Parent: ${data.parent}
 Phone: ${data.phone}
+Address: ${data.address}
 Timing: ${data.timing}
 Date: ${data.date}
 

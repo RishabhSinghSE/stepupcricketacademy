@@ -141,7 +141,7 @@ emailjs.init({ publicKey: window.emailjsPublicKey });
 <form id="signupForm">
 <input id="name" placeholder="Player Name" required>
 <input id="age" type="number" min="5" max="14" placeholder="Age" required>
-<input id="parent" placeholder="Parent Name" required>
+<input id="parentName" placeholder="Parent Name" required>
 <input id="phone" placeholder="Phone Number" required>
 <input id="address" placeholder="Address" required>
 <select id="timing" required>
@@ -149,6 +149,8 @@ emailjs.init({ publicKey: window.emailjsPublicKey });
 <option>9 AM - 12 PM</option>
 <option>4 PM - 7 PM</option>
 <option>7 PM - 10 PM</option>
+<option>9 AM - 10 PM</option>
+    
 </select>
 <button class="submit">Submit Admission</button>
 </form>
@@ -229,16 +231,16 @@ if(!admissionsOpen)return;
 
 const reg="SCA-"+Date.now().toString().slice(-6);
 
-const data={
-reg,
-name:name.value,
-age:age.value,
-parent:parent.value,
-phone:phone.value,
-address:address.value,
-timing:timing.value,
-time:new Date().toLocaleString("en-IN"),
-date:new Date().toLocaleString("en-IN")
+const data = {
+    reg,
+    name: document.getElementById("name").value,
+    age: document.getElementById("age").value,
+    parent: document.getElementById("parentName").value,
+    phone: document.getElementById("phone").value,
+    address: document.getElementById("address").value,
+    timing: document.getElementById("timing").value,
+    time: new Date().toLocaleString("en-IN"),
+    date: new Date().toLocaleString("en-IN")
 };
 
 players.push(data);
@@ -258,7 +260,7 @@ Registration No: ${reg}
 
 Name: ${data.name}
 Age: ${data.age}
-Parent: ${data.parent}
+Parentname: ${data.parent}
 Phone: ${data.phone}
 Timing: ${data.timing}
 Date: ${data.date}
@@ -280,7 +282,7 @@ function loadTable(){
 tableBody.innerHTML="";
 players.forEach(p=>{
 const r=tableBody.insertRow();
-["reg","name","age","parent","phone","timing","date"].forEach(k=>{
+["reg","name","age","parentname","phone","timing","date"].forEach(k=>{
 r.insertCell().textContent=p[k];
 });
 });
@@ -302,3 +304,4 @@ show("home");
 
 </body>
 </html>
+

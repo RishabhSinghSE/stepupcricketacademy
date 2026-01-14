@@ -5,303 +5,123 @@
 <title>StepUp Cricket Academy | Admissions</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Font Awesome (Icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<style>
-:root{
-    --green:#0b6623;
-    --accent:#ff4500;
-    --danger:#c0392b;
-}
-*{box-sizing:border-box}
-body{
-    margin:0;
-    font-family:Segoe UI,Arial;
-    background:linear-gradient(135deg,#0b6623,#7CFC98);
-}
-header{
-    background:var(--green);
-    color:#fff;
-    text-align:center;
-    padding:1.5rem;
-}
-nav{
-    background:#fff;
-    display:flex;
-    justify-content:center;
-    gap:.6rem;
-    padding:.8rem;
-    flex-wrap:wrap;
-}
-nav button{
-    padding:.6rem 1.2rem;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
-    font-weight:600;
-    background:var(--accent);
-    color:#fff;
-}
-nav button.red{background:var(--danger)}
-section{
-    max-width:1100px;
-    margin:auto;
-    padding:1.5rem;
-}
-.hidden{display:none}
-.card{
-    background:#fff;
-    padding:1.5rem;
-    border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    margin-bottom:1.5rem;
-}
-h2{color:var(--green)}
-input,select{
-    width:100%;
-    padding:.7rem;
-    margin:.4rem 0;
-    border-radius:6px;
-    border:1px solid #ccc;
-}
-button.submit{
-    background:var(--green);
-    color:#fff;
-    border:none;
-    padding:.9rem;
-    width:100%;
-    border-radius:8px;
-    font-size:1rem;
-}
-.success{background:#d4edda;padding:1rem;border-radius:6px}
-.error{background:#f8d7da;padding:1rem;border-radius:6px}
-table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:.9rem;
-}
-th,td{padding:.6rem;border-bottom:1px solid #ddd}
-th{background:var(--green);color:#fff}
-.admin-controls{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:1rem;
-    margin-bottom:1rem;
-}
-.admin-controls button{
-    padding:.8rem;
-    border:none;
-    border-radius:8px;
-    font-weight:600;
-}
-.admin-controls .stop{background:var(--danger);color:#fff}
-.admin-controls .start{background:#27ae60;color:#fff}
-</style>
 </head>
 
 <body>
 
-<!-- EMAILJS CONFIG -->
-<script>
-window.emailjsPublicKey = '8A1srPbKddX75ORGR';
-window.emailjsServiceId = 'service_4t27r3p';
-window.emailjsTemplateId = 'template_p0fpv7p';
-emailjs.init({ publicKey: window.emailjsPublicKey });
-</script>
+<header class="hero">
+  <h1>🏏 StepUp Cricket Academy</h1>
+  <p>Phaphamau, Prayagraj | Under-15 Professional Training Program</p>
 
-<header>
-<h1>🏏 StepUp Cricket Academy</h1>
-<p>Phaphamau, Prayagraj | Under-15 Training Program</p>
+  <div class="hero-buttons">
+    <button onclick="show('signup')">Join Now</button>
+    <button onclick="show('home')" class="outline">Explore Facilities</button>
+  </div>
 </header>
 
 <nav>
-<button onclick="show('home')">Home</button>
-<button onclick="show('signup')">Player Signup</button>
-<button onclick="show('login')">Admin Login</button>
-<button class="red" onclick="logout()">Logout</button>
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('signup')">Player Signup</button>
+  <button onclick="show('login')">Admin Login</button>
+  <button class="red" onclick="logout()">Logout</button>
 </nav>
 
 <section id="home">
-<div class="card">
-<h2>Facilities</h2>
-<ul>
-<li>Astro Turf Ground</li>
-<li>Certified Coaches</li>
-<li>Net Practice</li>
-<li>Weekly Matches</li>
-</ul>
-</div>
+  <div class="card">
+    <h2>🏟️ Our Facilities</h2>
+    <div class="facility-grid">
+      <div>🏏 Astro Turf Ground</div>
+      <div>🥅 Net Practice Area</div>
+      <div>🧘 Yoga & Fitness Sessions</div>
+      <div>🚿 Clean Bathrooms</div>
+      <div>🏏 New Bats & Equipment</div>
+      <div>👨‍🏫 Certified Coach</div>
+      <div>🌳 Healthy Playing Environment</div>
+      <div>🎥 Video Analysis</div>
+      <div>🏆 Weekly Matches & Tournaments</div>
+    </div>
+  </div>
 </section>
 
 <section id="signup" class="hidden">
-<div class="card">
-<h2>Player Admission</h2>
-<div id="admissionStatus"></div>
-<form id="signupForm">
-<input id="name" placeholder="Player Name" required>
-<input id="age" type="number" min="5" max="14" placeholder="Age" required>
-<input id="parentName" placeholder="Parent Name" required>
-<input id="phone" placeholder="Phone Number" required>
-<input id="address" placeholder="Address" required>
-<select id="timing" required>
-<option value="">Select Timing</option>
-<option>9 AM - 12 PM</option>
-<option>4 PM - 7 PM</option>
-<option>7 PM - 10 PM</option>
-<option>9 AM - 10 PM</option>
-    
-</select>
-<button class="submit">Submit Admission</button>
-</form>
-<div id="submitMsg"></div>
-</div>
+  <div class="card">
+    <h2>📝 Player Admission</h2>
+    <div id="admissionStatus"></div>
+
+    <form id="signupForm">
+      <input id="name" placeholder="Player Name" required>
+      <input id="age" type="number" min="5" max="14" placeholder="Age" required>
+      <input id="parentName" placeholder="Parent Name" required>
+      <input id="phone" placeholder="Phone Number" required>
+      <input id="address" placeholder="Address" required>
+
+      <select id="timing" required>
+        <option value="">Select Timing</option>
+        <option>9 AM - 12 PM</option>
+        <option>4 PM - 7 PM</option>
+        <option>7 PM - 10 PM</option>
+        <option>9 AM - 10 PM</option>
+      </select>
+
+      <button class="submit">Submit Admission</button>
+    </form>
+
+    <div id="submitMsg"></div>
+  </div>
 </section>
 
 <section id="login" class="hidden">
-<div class="card">
-<h2>Admin Login</h2>
-<form id="loginForm">
-<input id="adminEmail" placeholder="Email" required>
-<input id="adminPass" type="password" placeholder="Password" required>
-<button class="submit">Login</button>
-</form>
-</div>
+  <div class="card">
+    <h2>🔐 Admin Login</h2>
+    <form id="loginForm">
+      <input id="adminEmail" placeholder="Email" required>
+      <input id="adminPass" type="password" placeholder="Password" required>
+      <button class="submit">Login</button>
+    </form>
+  </div>
 </section>
 
 <section id="admin" class="hidden">
-<div class="card">
-<h2>Admin Dashboard</h2>
+  <div class="card">
+    <h2>📊 Admin Dashboard</h2>
 
-<div class="admin-controls">
-<button class="stop" onclick="toggleAdmissions(false)">🔴 Stop Admissions</button>
-<button class="start" onclick="toggleAdmissions(true)">🟢 Start Admissions</button>
-<button onclick="exportData('csv')">⬇ Export CSV</button>
-<button onclick="exportData('json')">⬇ Export JSON</button>
-</div>
+    <div class="admin-controls">
+      <button class="stop" onclick="toggleAdmissions(false)">🔴 Stop Admissions</button>
+      <button class="start" onclick="toggleAdmissions(true)">🟢 Start Admissions</button>
+      <button onclick="exportData('csv')">⬇ Export CSV</button>
+      <button onclick="exportData('json')">⬇ Export JSON</button>
+    </div>
 
-<table>
-<thead>
-<tr>
-<th>Reg No</th><th>Name</th><th>Age</th><th>Parent</th><th>Phone</th><th>Timing</th><th>Date</th>
-</tr>
-</thead>
-<tbody id="tableBody"></tbody>
-</table>
-</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Reg No</th><th>Name</th><th>Age</th><th>Parent</th><th>Phone</th><th>Timing</th><th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
 </section>
 
-<script>
-const ADMIN_EMAIL="yash@admin.com";
-const ADMIN_PASS="yash@mishra1";
+<footer>
+  <div class="social">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-whatsapp"></i></a>
+  </div>
 
-let players=JSON.parse(localStorage.getItem("players"))||[];
-let admissionsOpen=JSON.parse(localStorage.getItem("admissions")) ?? true;
+  <p>© 2026 StepUp Cricket Academy. All Rights Reserved.</p>
+  <p>Registered Sports Training Institute</p>
+</footer>
 
-function show(id){
-document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
-if(id==="admin")loadTable();
-if(id==="signup")checkStatus();
-}
-
-function logout(){show("home")}
-
-function checkStatus(){
-admissionStatus.innerHTML = admissionsOpen ? "" : "<div class='error'>Admissions Closed</div>";
-signupForm.querySelector("button").disabled=!admissionsOpen;
-}
-
-function toggleAdmissions(val){
-admissionsOpen=val;
-localStorage.setItem("admissions",JSON.stringify(val));
-alert(val?"Admissions Opened":"Admissions Closed");
-}
-
-loginForm.onsubmit=e=>{
-e.preventDefault();
-if(adminEmail.value===ADMIN_EMAIL && adminPass.value===ADMIN_PASS){
-show("admin");
-}else alert("Invalid Login");
-};
-
-signupForm.onsubmit=async e=>{
-e.preventDefault();
-if(!admissionsOpen)return;
-
-const reg="SCA-"+Date.now().toString().slice(-6);
-
-const data = {
-    reg,
-    name: document.getElementById("name").value,
-    age: document.getElementById("age").value,
-    parent: document.getElementById("parentName").value,
-    phone: document.getElementById("phone").value,
-    address: document.getElementById("address").value,
-    timing: document.getElementById("timing").value,
-    time: new Date().toLocaleString("en-IN"),
-    date: new Date().toLocaleString("en-IN")
-};
-
-players.push(data);
-localStorage.setItem("players",JSON.stringify(players));
-
-/* 🔥 EMAILJS SEND */
-try{
-await emailjs.send(window.emailjsServiceId,window.emailjsTemplateId,data);
-}catch(err){
-console.error("EmailJS Error",err);
-}
-
-/* 📄 DOWNLOAD PROOF */
-const proof=`STEPUP CRICKET ACADEMY
--------------------------
-Registration No: ${reg}
-
-Name: ${data.name}
-Age: ${data.age}
-Parentname: ${data.parent}
-Phone: ${data.phone}
-Timing: ${data.timing}
-Date: ${data.date}
-
-This receipt is valid as admission proof.
-`;
-
-const blob=new Blob([proof],{type:"text/plain"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download=`StepUp_${reg}.txt`;
-a.click();
-
-submitMsg.innerHTML="<div class='success'>Admission Successful! Email sent & proof downloaded.</div>";
-signupForm.reset();
-};
-
-function loadTable(){
-tableBody.innerHTML="";
-players.forEach(p=>{
-const r=tableBody.insertRow();
-["reg","name","age","parentname","phone","timing","date"].forEach(k=>{
-r.insertCell().textContent=p[k];
-});
-});
-}
-
-function exportData(type){
-let content= type==="csv"
-? "Reg,Name,Age,Parent,Phone,Timing,Date\n"+players.map(p=>`${p.reg},${p.name},${p.age},${p.parent},${p.phone},${p.timing},${p.date}`).join("\n")
-: JSON.stringify(players,null,2);
-const blob=new Blob([content],{type:"text/plain"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="stepup_data."+type;
-a.click();
-}
-
-show("home");
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
-

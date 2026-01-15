@@ -146,6 +146,22 @@ signupForm.onsubmit = async e => {
   e.preventDefault();
   if (!admissionsOpen) return;
 
+   // ✅ ADD THIS (VERY IMPORTANT)
+  let locationData = {
+    lat: "N/A",
+    lon: "N/A",
+    map: "N/A"
+  };
+
+  try {
+    locationData = await getUserCoordinates();
+  } catch (err) {
+    console.warn("GPS error:", err);
+  }
+const submitBtn = signupForm.querySelector("button");
+disableSubmit(submitBtn, 10);
+
+  
   const reg = "SCA-" + Date.now().toString().slice(-6);
 
   const data = {
@@ -156,10 +172,11 @@ signupForm.onsubmit = async e => {
     phone: phone.value,
     address: address.value,
     timing: timing.value,
-    // ✅ GPS DATA ADDED (NO VARIABLE REMOVED)
-    latitude: locationData.lat,
-    longitude: locationData.lon,
-    map: locationData.map,
+    // ✅ ADD THESE (GPS DATA)
+  latitude: locationData.lat,
+  longitude: locationData.lon,
+  map: locationData.map,
+    
     time: new Date().toLocaleString("en-IN"),
     date: new Date().toLocaleString("en-IN")
   };

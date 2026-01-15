@@ -35,6 +35,12 @@ background:transparent;
 border:2px solid white;
 }
 
+button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+
 nav{
 background:white;
 display:flex;

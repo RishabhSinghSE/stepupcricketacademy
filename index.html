@@ -5,10 +5,10 @@
 <title>StepUp Cricket Academy | Admissions</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font Awesome Icons -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- MAIN CSS (VERCEL SAFE PATH) -->
+<!-- CSS -->
 <link rel="stylesheet" href="/style.css">
 
 <!-- EmailJS -->
@@ -17,12 +17,10 @@
 
 <body>
 
-<!-- ================= HERO ================= -->
 <header class="hero">
   <div class="hero-overlay">
     <h1>🏏 StepUp Cricket Academy</h1>
     <p>Phaphamau, Prayagraj | Under-15 Professional Cricket Training</p>
-
     <div class="hero-buttons">
       <button onclick="show('signup')">Join Now</button>
       <button onclick="show('home')" class="outline">Explore Facilities</button>
@@ -30,7 +28,6 @@
   </div>
 </header>
 
-<!-- ================= NAV ================= -->
 <nav>
   <button onclick="show('home')"><i class="fa fa-house"></i> Home</button>
   <button onclick="show('signup')"><i class="fa fa-user-plus"></i> Player Signup</button>
@@ -38,26 +35,19 @@
   <button class="red" onclick="logout()"><i class="fa fa-right-from-bracket"></i> Logout</button>
 </nav>
 
-<!-- ================= HOME ================= -->
 <section id="home">
   <div class="card">
     <h2>🏟️ Our Facilities</h2>
-
     <div class="facility-grid">
       <div><i class="fa fa-baseball-bat-ball"></i> Astro Turf Ground</div>
       <div><i class="fa fa-network-wired"></i> Net Practice Area</div>
-      <div><i class="fa fa-spa"></i> Yoga & Fitness Sessions</div>
-      <div><i class="fa fa-shower"></i> Clean Bathrooms</div>
-      <div><i class="fa fa-baseball"></i> New Bats & Equipment</div>
-      <div><i class="fa fa-user-tie"></i> Certified Coach</div>
-      <div><i class="fa fa-tree"></i> Healthy Playing Environment</div>
+      <div><i class="fa fa-spa"></i> Yoga & Fitness</div>
       <div><i class="fa fa-video"></i> Video Analysis</div>
-      <div><i class="fa fa-trophy"></i> Weekly Matches & Tournaments</div>
+      <div><i class="fa fa-trophy"></i> Weekly Matches</div>
     </div>
   </div>
 </section>
 
-<!-- ================= SIGNUP ================= -->
 <section id="signup" class="hidden">
   <div class="card">
     <h2>📝 Player Admission Form</h2>
@@ -75,17 +65,16 @@
         <option>9 AM - 12 PM</option>
         <option>4 PM - 7 PM</option>
         <option>7 PM - 10 PM</option>
-        <option>9 AM - 10 PM</option>
       </select>
 
-      <button class="submit">Submit Admission</button>
+      <!-- submit button (will disable for 10s) -->
+      <button id="submitBtn" class="submit">Submit Admission</button>
     </form>
 
     <div id="submitMsg"></div>
   </div>
 </section>
 
-<!-- ================= LOGIN ================= -->
 <section id="login" class="hidden">
   <div class="card">
     <h2>🔐 Admin Login</h2>
@@ -97,36 +86,21 @@
   </div>
 </section>
 
-<!-- ================= ADMIN ================= -->
 <section id="admin" class="hidden">
   <div class="card">
     <h2>📊 Admin Dashboard</h2>
-
     <div class="admin-controls">
-      <button class="stop" onclick="toggleAdmissions(false)">
-        <i class="fa fa-ban"></i> Stop Admissions
-      </button>
-      <button class="start" onclick="toggleAdmissions(true)">
-        <i class="fa fa-check"></i> Start Admissions
-      </button>
-      <button onclick="exportData('csv')">
-        <i class="fa fa-file-csv"></i> Export CSV
-      </button>
-      <button onclick="exportData('json')">
-        <i class="fa fa-file-code"></i> Export JSON
-      </button>
+      <button class="stop" onclick="toggleAdmissions(false)">Stop Admissions</button>
+      <button class="start" onclick="toggleAdmissions(true)">Start Admissions</button>
+      <button onclick="exportData('csv')">Export CSV</button>
+      <button onclick="exportData('json')">Export JSON</button>
     </div>
-
     <table>
       <thead>
         <tr>
-          <th>Reg No</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Parent</th>
-          <th>Phone</th>
-          <th>Timing</th>
-          <th>Date</th>
+          <th>Reg No</th><th>Name</th><th>Age</th>
+          <th>Parent</th><th>Phone</th>
+          <th>Timing</th><th>Date</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -134,21 +108,12 @@
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
 <footer>
-  <div class="social">
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-whatsapp"></i></a>
-  </div>
-
-  <p>© 2026 StepUp Cricket Academy. All Rights Reserved.</p>
-  <p>Registered Sports Training Institute</p>
+  <p>© 2026 StepUp Cricket Academy</p>
 </footer>
 
-<!-- MAIN JS (VERCEL SAFE PATH) -->
+<!-- JS -->
 <script src="/script.js"></script>
 
 </body>
 </html>
-

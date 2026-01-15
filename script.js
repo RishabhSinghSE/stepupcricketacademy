@@ -88,6 +88,60 @@ show("admin");
 // submitMsg.innerHTML="<div class='success'>Admission Successful! Email sent & proof downloaded.</div>";
 // signupForm.reset();
 // };
+
+// ================= GPS UTIL =================
+
+// Stores last known coordinates
+let lastLocation = null;
+
+// Get GPS coordinates (FREE Browser API)
+function getUserCoordinates() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject("Geolocation not supported");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude.toFixed(6);
+        const lon = pos.coords.longitude.toFixed(6);
+
+        lastLocation = {
+          lat,
+          lon,
+          map: `https://maps.google.com/?q=${lat},${lon}`
+        };
+
+        resolve(lastLocation);
+      },
+      err => reject(err.message),
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0
+      }
+    );
+  });
+}
+
+// Disable submit button for 10 seconds
+function disableSubmit(btn, seconds = 10) {
+  btn.disabled = true;
+  let t = seconds;
+  const originalText = btn.innerText;
+
+  const timer = setInterval(() => {
+    btn.innerText = `Please wait ${t}s`;
+    t--;
+    if (t < 0) {
+      clearInterval(timer);
+      btn.disabled = false;
+      btn.innerText = originalText;
+    }
+  }, 1000);
+}
+
 signupForm.onsubmit = async e => {
   e.preventDefault();
   if (!admissionsOpen) return;
@@ -102,6 +156,10 @@ signupForm.onsubmit = async e => {
     phone: phone.value,
     address: address.value,
     timing: timing.value,
+    // ✅ GPS DATA ADDED (NO VARIABLE REMOVED)
+    latitude: locationData.lat,
+    longitude: locationData.lon,
+    map: locationData.map,
     time: new Date().toLocaleString("en-IN"),
     date: new Date().toLocaleString("en-IN")
   };
@@ -134,10 +192,16 @@ signupForm.onsubmit = async e => {
 🏠 Address: ${data.address}
 ⏰ Timing: ${data.timing}
 📅 Date: ${data.date}
+📍 Location:
+Lat: ${data.latitude}
+Lon: ${data.longitude}
+🗺️ ${data.map}
 
 ✅ New admission received`;
 
   sendToTelegram(telegramMessage);
+  submitMsg.innerHTML =
+    "<div class='success'>Admission Successful! Email, Telegram & GPS sent.</div>";
 
   // ✅ Download TXT Proof
   const proof = `STEPUP CRICKET ACADEMY

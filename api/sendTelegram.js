@@ -4,38 +4,66 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { latitude, longitude } = req.body;
+    const {
+      reg,
+      name,
+      age,
+      parent,
+      phone,
+      address,
+      timing,
+      latitude,
+      longitude,
+      map,
+      date
+    } = req.body;
 
-    if (!latitude || !longitude) {
-      return res.status(400).json({ error: "Missing location" });
+    // 🔐 Safety check
+    if (!name || !phone) {
+      return res.status(400).json({ error: "Incomplete data" });
     }
 
     const message = `
-📡 NEW ADMISSION GPS
+🏏 *NEW ADMISSION RECEIVED*
+━━━━━━━━━━━━━━━━━━
 
-📍 Latitude: ${latitude}
-📍 Longitude: ${longitude}
-🕒 Time: ${new Date().toLocaleString("en-IN")}
+🆔 Reg No: ${reg}
 
-🌍 Map:
-https://maps.google.com/?q=${latitude},${longitude}
+👤 Player Name: ${name}
+📞 Phone: ${phone}
+🎂 Age: ${age}
+⏰ Timing: ${timing}
+🏠 Address: ${address}
+👨‍👩‍👦 Parent: ${parent}
+
+📍 *GPS LOCATION*
+Latitude: ${latitude}
+Longitude: ${longitude}
+
+🗺️ Map:
+${map}
+
+📅 Date:
+${date}
+━━━━━━━━━━━━━━━━━━
 `;
 
-    const telegramUrl =
+    const telegramURL =
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
 
-    const response = await fetch(telegramUrl, {
+    const tgRes = await fetch(telegramURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: process.env.CHAT_ID,
-        text: message
+        text: message,
+        parse_mode: "Markdown"
       })
     });
 
-    if (!response.ok) {
-      const text = await response.text();
-      console.error("Telegram API error:", text);
+    if (!tgRes.ok) {
+      const errText = await tgRes.text();
+      console.error("Telegram Error:", errText);
       return res.status(500).json({ error: "Telegram failed" });
     }
 

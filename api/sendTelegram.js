@@ -1,31 +1,30 @@
-import fetch from "node-fetch";
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { latitude, longitude } = req.body;
+  try {
+    const { latitude, longitude } = req.body;
 
-  if (!latitude || !longitude) {
-    return res.status(400).json({ error: "Missing location" });
-  }
+    if (!latitude || !longitude) {
+      return res.status(400).json({ error: "Missing location" });
+    }
 
-  const time = new Date().toLocaleString("en-IN");
-
-  const message = `
-📡 GPS LOCATION RECEIVED
+    const message = `
+📡 NEW ADMISSION GPS
 
 📍 Latitude: ${latitude}
 📍 Longitude: ${longitude}
-🕒 Time: ${time}
+🕒 Time: ${new Date().toLocaleString("en-IN")}
 
 🌍 Map:
 https://maps.google.com/?q=${latitude},${longitude}
 `;
 
-  try {
-    await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+    const telegramUrl =
+      `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
+
+    const response = await fetch(telegramUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -34,8 +33,16 @@ https://maps.google.com/?q=${latitude},${longitude}
       })
     });
 
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("Telegram API error:", text);
+      return res.status(500).json({ error: "Telegram failed" });
+    }
+
     return res.status(200).json({ success: true });
+
   } catch (err) {
-    return res.status(500).json({ error: "Telegram failed" });
+    console.error("Backend crash:", err);
+    return res.status(500).json({ error: "Server error" });
   }
 }
